@@ -1,3 +1,5 @@
+.card-bg-wrapper {
+  box-sizing: content-box !important;
 <script setup>
 import { ref, computed } from 'vue'
 import CowCard from '@/components/CowCard.vue'
@@ -80,27 +82,30 @@ const resetCards = () => {
       <p>Find your perfect cow</p>
     </header>
 
-    <div v-if="hasMoreCows" class="card-container">
-      <CowCard
-        :cow="currentCow"
-        :class="{ 'swipe-left': swipeDirection === 'left', 'swipe-right': swipeDirection === 'right' }"
-      />
-      <div class="actions">
-        <button class="btn btn-pass" @click="swipe('left')">✕ Pass</button>
-        <button class="btn btn-like" @click="swipe('right')">♥ Like</button>
-      </div>
-    </div>
-
-    <div v-else class="no-more">
-      <h2>🎉 That's all folks!</h2>
-      <p>You liked {{ likedCows.length }} cow(s)</p>
-      <div v-if="likedCows.length > 0" class="liked-list">
-        <h3>Your matches:</h3>
-        <div v-for="cow in likedCows" :key="cow.id" class="liked-item">
-          {{ cow.name }} - €{{ cow.price.toLocaleString() }}
+    <div class="card-bg-wrapper">
+      <div v-if="hasMoreCows" class="card-container-horizontal">
+        <div class="card-row">
+          <CowCard
+            :cow="currentCow"
+            :class="{ 'swipe-left': swipeDirection === 'left', 'swipe-right': swipeDirection === 'right' }"
+          />
+          <div class="actions-vertical">
+            <button class="btn btn-pass" @click="swipe('left')">✕ Pass</button>
+            <button class="btn btn-like" @click="swipe('right')">♥ Like</button>
+          </div>
         </div>
       </div>
-      <button class="btn btn-reset" @click="resetCards">Start Over</button>
+      <div v-else class="no-more">
+        <h2>🎉 That's all folks!</h2>
+        <p>You liked {{ likedCows.length }} cow(s)</p>
+        <div v-if="likedCows.length > 0" class="liked-list">
+          <h3>Your matches:</h3>
+          <div v-for="cow in likedCows" :key="cow.id" class="liked-item">
+            {{ cow.name }} - €{{ cow.price.toLocaleString() }}
+          </div>
+        </div>
+        <button class="btn btn-reset" @click="resetCards">Start Over</button>
+      </div>
     </div>
   </div>
 </template>
@@ -110,8 +115,51 @@ const resetCards = () => {
 .header { margin-bottom: 20px; color: white; }
 .header h1 { font-size: 2.5rem; margin-bottom: 5px; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
 .header p { opacity: 0.9; font-size: 1.1rem; }
-.card-container { position: relative; }
-.actions { display: flex; justify-content: center; gap: 20px; margin-top: 20px; }
+/* Wrapper for background, not the card itself */
+/* Make background fit content, not border-box */
+/* .card-bg-wrapper box-sizing removed as requested */
+.card-bg-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 40px auto;
+  background: linear-gradient(120deg, #f8fafc 60%, #e3e6f3 100%);
+  border-radius: 32px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.10);
+  max-width: 1400px;
+  width: auto;
+  height: auto;
+  padding: 0;
+}
+.card-container-horizontal {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 420px;
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
+  margin: 0 auto;
+}
+.card-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  gap: 64px;
+}
+.actions-vertical {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 48px;
+  margin-left: 24px;
+}
 .btn { padding: 15px 40px; font-size: 1.1rem; border: none; border-radius: 50px; cursor: pointer; font-weight: 600; transition: transform 0.2s, box-shadow 0.2s; }
 .btn:hover { transform: scale(1.05); }
 .btn-pass { background: white; color: #f44336; box-shadow: 0 4px 15px rgba(244, 67, 54, 0.3); }
@@ -125,6 +173,30 @@ const resetCards = () => {
 .liked-item:last-child { border-bottom: none; }
 .swipe-left { animation: swipeLeft 0.3s forwards; }
 .swipe-right { animation: swipeRight 0.3s forwards; }
+@media (max-width: 1200px) {
+  .card-row {
+    gap: 32px;
+    max-width: 98vw;
+  }
+  .card-container-horizontal {
+    min-height: 50vh;
+    border-radius: 18px;
+  }
+}
+@media (max-width: 900px) {
+  .card-container-horizontal, .card-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    min-height: unset;
+  }
+  .actions-vertical {
+    flex-direction: row;
+    gap: 20px;
+    margin-left: 0;
+    margin-top: 20px;
+  }
+}
 @keyframes swipeLeft { to { transform: translateX(-150%) rotate(-20deg); opacity: 0; } }
 @keyframes swipeRight { to { transform: translateX(150%) rotate(20deg); opacity: 0; } }
 </style>
