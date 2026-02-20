@@ -2,7 +2,7 @@
 import { ref, computed } from 'vue'
 import CowCard from './components/CowCard.vue'
 
-// 1. Η "Βάση Δεδομένων" μας (Array με objects)
+// Database of cows
 const cows = [
   {
     name: 'Bella',
@@ -36,16 +36,19 @@ const cows = [
   }
 ]
 
-// 2. State Management
-const currentIndex = ref(0) // Ξεκινάμε από την αγελάδα στο index 0
+// State Management
+const currentIndex = ref(0)
+const swipeDirection = ref('') // Will be 'swipe-right' or 'swipe-left'
 
-// Το computed παρακολουθεί το currentIndex. Αν αλλάξει, φέρνει την επόμενη αγελάδα.
 const currentCow = computed(() => cows[currentIndex.value])
 
-// 3. Η συνάρτηση που τρέχει όταν κάνουμε swipe (είτε like, είτε pass)
+// Handler for the emit events from CowCard
 const handleSwipe = (action) => {
-  console.log(`You just swiped ${action} on ${currentCow.value.name}!`)
-  currentIndex.value++ // Πάμε στο επόμενο index
+  // 1. Set the animation direction based on the action
+  swipeDirection.value = action === 'like' ? 'swipe-right' : 'swipe-left'
+  
+  // 2. Increment index to trigger the Vue Transition
+  currentIndex.value++
 }
 </script>
 
@@ -60,18 +63,67 @@ const handleSwipe = (action) => {
       </div>
     </nav>
 
-    <main class="flex-1 flex justify-center items-center p-4">
-      <CowCard 
-        v-if="currentCow" 
-        :cow="currentCow" 
-        @pass="handleSwipe('pass')" 
-        @like="handleSwipe('like')" 
-      />
+    <main class="flex-1 flex justify-center items-center p-4 overflow-hidden">
       
-      <div v-else class="text-center bg-white/20 backdrop-blur-md p-10 rounded-3xl shadow-xl">
-        <h2 class="text-4xl font-bold text-white mb-4">Τέλος οι αγελάδες! 🌾</h2>
-        <p class="text-xl text-white/80">Δοκίμασε να αυξήσεις την ακτίνα αναζήτησης.</p>
-      </div>
+      <Transition :name="swipeDirection" mode="out-in">
+        
+        <CowCard 
+          v-if="currentCow" 
+          :key="currentCow.name"
+          :cow="currentCow" 
+          @pass="handleSwipe('pass')" 
+          @like="handleSwipe('like')" 
+        />
+        
+        <div v-else key="empty-state" class="text-center bg-white/20 backdrop-blur-md p-10 rounded-3xl shadow-xl">
+          <h2 class="text-4xl font-bold text-white mb-4">No more cows! 🌾</h2>
+          <p class="text-xl text-white/80">Try expanding your search radius to find more matches.</p>
+        </div>
+
+      </Transition>
+
     </main>
   </div>
 </template>
+
+<style>
+/* VUE TRANSITION CSS 
+  We define the enter/leave states for both right (Like) and left (Pass) directions.
+*/
+
+/* --- SWIPE RIGHT (LIKE) --- */
+.swipe-right-leave-active,
+.swipe-right-enter-active {
+  transition: all 0.4s cubic-bezier(0.5, 0, 0.2, 1);
+}
+
+/* Card flies out to the right, rotating slightly */
+.swipe-right-leave-to {
+  opacity: 0;
+  transform: translateX(100vw) rotate(15deg);
+}
+
+/* New card scales up from the background */
+.swipe-right-enter-from {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+/* --- SWIPE LEFT (PASS) --- */
+.swipe-left-leave-active,
+.swipe-left-enter-active {
+  transition: all 0.4s cubic-bezier(0.5, 0, 0.2, 1);
+}
+
+/* Card flies out to the left, rotating slightly */
+.swipe-left-leave-to {
+  opacity: 0;
+  transform: translateX(-100vw) rotate(-15deg);
+}
+
+/* New card scales up from the background */
+.swipe-left-enter-from {
+  opacity: 0;
+  transform: scale(0.8);
+}
+</style>
