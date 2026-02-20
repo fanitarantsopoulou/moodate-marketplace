@@ -2,6 +2,8 @@
 defineProps({
   cow: Object
 })
+
+defineEmits(['like', 'pass'])
 </script>
 
 <template>
@@ -31,10 +33,10 @@ defineProps({
       </div>
 
       <div class="flex gap-4 mt-6">
-        <button class="flex-1 py-4 border-2 border-red-500 text-red-500 rounded-xl font-bold text-xl hover:bg-red-50 transition">
+        <button @click="$emit('pass')" class="flex-1 py-4 border-2 border-red-500 text-red-500 rounded-xl font-bold text-xl hover:bg-red-50 transition">
           ✕ Pass
         </button>
-        <button class="flex-1 py-4 bg-green-500 text-white rounded-xl font-bold text-xl shadow-lg hover:bg-green-600 hover:-translate-y-1 transition transform">
+        <button @click="$emit('like')" class="flex-1 py-4 bg-green-500 text-white rounded-xl font-bold text-xl shadow-lg hover:bg-green-600 hover:-translate-y-1 transition transform">
           ♥ Like
         </button>
       </div>
