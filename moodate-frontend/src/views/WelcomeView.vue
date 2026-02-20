@@ -24,7 +24,7 @@
       </p>
 
       <div class="flex flex-col md:flex-row gap-8 justify-center">
-        <router-link to="/login" class="flex-1 bg-[#2f855a] text-[#fdfcf0] border-4 border-[#451a03] py-5 font-black text-2xl uppercase hover:bg-green-800 transition shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] active:translate-y-2 active:shadow-none">
+        <router-link to="/login" class="flex-1 bg-[#2f855a] text-[#fdfcf0] border-4 border-[#451a03] py-8 font-black text-2xl uppercase hover:bg-green-800 transition shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] active:translate-y-2 active:shadow-none">
           Enter Saloon (Login)
         </router-link>
         

@@ -6,7 +6,7 @@ import RegisterView from '../views/RegisterView.vue'
 import MessagesView from '../views/MessagesView.vue'
 import WelcomeView from '../views/WelcomeView.vue'
 import ProfileView from '../views/ProfileView.vue'
-import AddListing from '../views/AddListing.vue'
+import AddListView from '../views/AddListView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -18,7 +18,7 @@ const router = createRouter({
     { path: '/register', name: 'register', component: RegisterView },
     { path: '/profile', name: 'profile', component: ProfileView },  
     { path: '/messages', name: 'messages', component: MessagesView },
-    { path: '/add-listing', name: 'add-listing', component: AddListing },
+    { path: '/add-listing', name: 'add-listing', component: AddListView },
   ]
 })
 
