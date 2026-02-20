@@ -59,10 +59,18 @@ const handleSwipe = (action) => {
         @like="handleSwipe('like')" 
       />
       
-      <div v-else key="empty-state" class="text-center bg-white/20 backdrop-blur-md p-10 rounded-3xl shadow-xl">
-        <h2 class="text-4xl font-bold text-white mb-4">No more cows! 🌾</h2>
-        <p class="text-xl text-white/80">Try expanding your search radius to find more matches.</p>
-      </div>
+      <div v-else key="empty-state" class="text-center bg-[#fdfcf0] border-8 border-double border-[#451a03] p-12 shadow-[16px_16px_0px_0px_rgba(69,26,3,1)] max-w-lg">
+  <h2 class="text-5xl font-black text-[#963030] mb-6 uppercase tracking-tighter italic">
+    OUT OF CATTLE! 🌵
+  </h2>
+  <p class="text-2xl text-[#451a03] font-bold leading-tight mb-8">
+    THE DUST HAS SETTLED. NO MORE BEASTS LEFT IN THIS COUNTY, PARTNER.
+  </p>
+  <button @click="currentIndex = 0" class="bg-[#d97706] text-[#fdfcf0] border-4 border-[#451a03] px-8 py-3 font-black uppercase hover:bg-orange-600 transition shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-y-1">
+    RELOAD THE TRAIL
+  </button>
+</div>
+
 
     </Transition>
 

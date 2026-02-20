@@ -1,8 +1,19 @@
 @import "tailwindcss";
 
+@theme {
+  /* Let's define some custom "Cowboy" colors */
+  --color-dusty-orange: #d97706;
+  --color-western-brown: #451a03;
+  --color-desert-sand: #fef3c7;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  font-family: system-ui, -apple-system, sans-serif;
+  /* Retro paper/sand texture color */
+  background-color: #f5f5dc; 
+  /* Adding a subtle grain/retro feel if you want later, but for now: */
+  background-image: radial-gradient(#d1d1b8 0.5px, transparent 0.5px);
+  background-size: 20px 20px;
+  font-family: 'Courier New', Courier, monospace; /* Rugged typewriter feel */
 }
