@@ -9,7 +9,7 @@ const password = ref('')
 const handleLogin = () => {
   console.log('Authenticating Cowboy:', email.value)
   // Προσομοίωση login
-  router.push('/')
+  router.push('/swipe')
 }
 </script>
 
