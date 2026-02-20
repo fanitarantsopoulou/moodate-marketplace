@@ -1,5 +1,8 @@
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 // Dummy data για τις επαφές (Matches)
 const contacts = ref([
@@ -10,6 +13,13 @@ const contacts = ref([
 
 const activeContact = ref(contacts.value[0])
 const newMessage = ref('')
+
+// Η συνάρτηση για το κλικ
+const viewUserProfile = () => {
+  // Αργότερα, όταν έχουμε backend, εδώ θα περνάμε το ID: `/profile/${activeContact.value.id}`
+  // Προς το παρόν τον στέλνουμε στο γενικό /profile
+  router.push('/profile')
+}
 
 // Dummy data για το ιστορικό του chat
 const messages = ref([
@@ -61,7 +71,7 @@ const sendMessage = () => {
             <h3 class="font-black text-xl uppercase tracking-widest">{{ activeContact.name }}</h3>
             <span class="text-sm font-bold italic">Negotiating: {{ activeContact.cow }}</span>
           </div>
-          <button class="border-2 border-[#fdfcf0] px-3 py-1 text-xs font-black uppercase hover:bg-[#fdfcf0] hover:text-[#d97706] transition">
+          <button @click="router.push({ name: 'profile' })" class="border-2 border-[#fdfcf0] px-3 py-1 text-xs font-black uppercase hover:bg-[#fdfcf0] hover:text-[#d97706] transition">
             View Profile
           </button>
         </div>

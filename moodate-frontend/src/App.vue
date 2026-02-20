@@ -8,7 +8,7 @@
         🤠 MooDate
       </router-link>
       <div class="space-x-8 font-bold text-[#fef3c7] uppercase text-sm tracking-widest">
-        <router-link to="/swipe" class="hover:text-orange-400 transition underline decoration-2">Swipe</router-link>
+        <router-link to="/swipe" class="hover:text-orange-400 transition underline decoration-2">Home</router-link>
         <router-link to="/listings" class="hover:text-orange-400 transition underline decoration-2">Listings</router-link>
         <router-link to="/messages" class="hover:text-orange-400 transition underline decoration-2">Messages</router-link>
         <router-link to="/profile" class="hover:text-orange-400 transition underline decoration-2">Profile</router-link>
@@ -18,6 +18,27 @@
       </div>
     </nav>
 
-    <router-view />
+    <router-view v-slot="{ Component }">
+      <transition name="slide-fade" mode="out-in">
+        <component :is="Component" />
+      </transition>
+    </router-view>
   </div>
 </template>
+
+<style>
+/* Η μαγεία του animation είναι πλέον έξω από το template */
+.slide-fade-enter-active {
+  transition: all 0.4s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.3s ease-in;
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateY(15px);
+  opacity: 0;
+}
+</style>
