@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
-
-// Dummy data for the ranch owner's cattle
+import { useRouter } from 'vue-router'
+const router = useRouter()
 const myCows = ref([
   { id: 1, name: 'Bella', breed: 'Holstein', status: 'Active', price: 2500 },
   { id: 2, name: 'Ermioni', breed: 'Brown Swiss', status: 'Pending', price: 3200 },
@@ -15,13 +15,15 @@ const deleteCow = (id) => {
 
 <template>
   <main class="flex-1 p-8">
-    <div class="max-w-5xl mx-auto bg-[#fdfcf0] border-8 border-double border-[#451a03] shadow-[16px_16px_0px_0px_rgba(69,26,3,1)] overflow-hidden">
-      
+    <div
+      class="max-w-5xl mx-auto bg-[#fdfcf0] border-8 border-double border-[#451a03] shadow-[16px_16px_0px_0px_rgba(69,26,3,1)] overflow-hidden">
+
       <div class="bg-[#451a03] p-6 flex justify-between items-center">
         <h1 class="text-4xl font-black text-[#fef3c7] uppercase italic tracking-tighter">
           Ranch Inventory
         </h1>
-        <button class="bg-[#d97706] text-[#451a03] px-6 py-2 border-2 border-[#fef3c7] font-black uppercase hover:bg-orange-500 transition shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)]">
+        <button @click="router.push('/add-listing')"
+          class="bg-[#d97706] text-[#451a03] px-6 py-2 border-2 border-[#fef3c7] font-black uppercase hover:bg-orange-500 transition shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)]">
           + Add New Cattle
         </button>
       </div>
@@ -50,10 +52,14 @@ const deleteCow = (id) => {
                   {{ cow.status }}
                 </span>
               </td>
-              <td class="border-4 border-[#451a03] p-4">€{{ cow.price }}</td>
+              <td class="border-4 border-[#451a03] p-4">${{ cow.price }}</td>
               <td class="border-4 border-[#451a03] p-4 text-center space-x-2">
-                <button class="text-blue-700 hover:text-blue-900 uppercase text-xs font-black">Edit</button>
-                <button @click="deleteCow(cow.id)" class="text-red-700 hover:text-red-900 uppercase text-xs font-black">Remove</button>
+                <button @click="router.push(`/edit-listing/${cow.id}`)"
+                  class="text-blue-700 hover:text-blue-900 uppercase text-xs font-black cursor-pointer">
+                  Edit
+                </button>
+                <button @click="deleteCow(cow.id)"
+                  class="text-red-700 hover:text-red-900 uppercase text-xs font-black">Remove</button>
               </td>
             </tr>
           </tbody>

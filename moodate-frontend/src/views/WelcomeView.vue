@@ -8,7 +8,7 @@
     <div class="bg-[#fdfcf0] border-8 border-double border-[#451a03] p-12 md:p-20 shadow-[24px_24px_0px_0px_rgba(69,26,3,1)] max-w-4xl w-full relative">
       
       <div class="absolute -top-8 -left-8 bg-[#963030] text-[#fdfcf0] px-6 py-2 border-4 border-[#451a03] font-black text-xl uppercase -rotate-6 shadow-[8px_8px_0px_0px_rgba(69,26,3,1)]">
-        Est. 1984
+        Est. 2026
       </div>
 
       <h1 class="text-6xl md:text-8xl font-black text-[#d97706] uppercase italic tracking-tighter mb-6 drop-shadow-[6px_6px_0px_rgba(69,26,3,1)]">
@@ -24,7 +24,7 @@
       </p>
 
       <div class="flex flex-col md:flex-row gap-8 justify-center">
-        <router-link to="/login" class="flex-1 bg-[#2f855a] text-[#fdfcf0] border-4 border-[#451a03] py-5 font-black text-2xl uppercase hover:bg-green-800 transition shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] active:translate-y-2 active:shadow-none">
+        <router-link to="/login" class="flex-1 bg-[#2f855a] text-[#fdfcf0] border-4 border-[#451a03] py-8 font-black text-2xl uppercase hover:bg-green-800 transition shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] active:translate-y-2 active:shadow-none">
           Enter Saloon (Login)
         </router-link>
         

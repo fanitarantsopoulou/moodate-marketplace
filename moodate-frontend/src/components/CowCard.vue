@@ -13,7 +13,7 @@ defineEmits(['like', 'pass'])
             <img :src="cow.image" :alt="cow.name" class="w-full h-full object-cover" />
             <div
                 class="absolute top-4 left-4 bg-[#d97706] border-2 border-[#451a03] text-[#451a03] px-4 py-1 rounded-none font-black text-2xl -rotate-3 shadow-[4px_4px_0px_0px_rgba(69,26,3,1)]">
-                €{{ cow.price.toLocaleString() }}
+                ${{ cow.price.toLocaleString() }}
             </div>
         </div>
 
@@ -24,8 +24,8 @@ defineEmits(['like', 'pass'])
 
                 <div class="bg-[#fef3c7] border-2 border-dashed border-[#451a03] p-4 rounded-none flex justify-between mb-6 shadow-[inset_4px_4px_0px_0px_rgba(217,119,6,0.2)]">
     <div class="flex flex-col items-center">
-        <span class="text-xs uppercase font-black text-[#d97706]">Weight</span>
-        <span class="text-[#451a03] font-black italic text-lg">{{ cow.weight }} KG</span>
+        <span class="text-xs uppercase font-black text-[#d97706]">Weight (lbs)</span>
+        <span class="text-[#451a03] font-black italic text-lg">{{ cow.weight }} lbs</span>
     </div>
     <div class="flex flex-col items-center border-x-2 border-[#451a03]/20 px-4">
         <span class="text-xs uppercase font-black text-[#d97706]">Location</span>
